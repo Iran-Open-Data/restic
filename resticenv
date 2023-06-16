@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 cd "$(dirname "$0")" || exit;
 
-export "$(grep -v "^#" "${ENV_FILE:=.env}" | xargs)"
+export $(grep -v "^#" "${ENV_FILE:=.env}" | xargs)
 
 allparams=("$@")
 exec restic "${allparams[@]}"
