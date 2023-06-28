@@ -3,5 +3,5 @@ cd "$(dirname "$0")" || exit;
 
 export $(grep -v "^#" "${ENV_FILE:=.env}" | xargs)
 
-docker exec -t "$DB_NAME" pg_dumpall -c -U postgres | \
+docker exec -t "$DB_NAME" pg_dumpall -c -U "${DB_USER:=postgres}" | \
 	restic backup --tag "database" --stdin --stdin-filename="${DB_NAME}.sql"
